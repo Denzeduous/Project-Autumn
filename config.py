@@ -1,7 +1,7 @@
 from datetime import datetime
 
 """
-	Constants to be left UNTOUCHED
+    Constants to be left UNTOUCHED
 """
 
 DEBUG = 10 # For debugging purposes
@@ -11,18 +11,18 @@ ERROR = 30 # For explicitly ONLY error messages
 CONSOLE = 1
 
 """
-	Logger config
+    Logger config
 """
 
 verbose = True
 
 DEFAULT_LOGGER = {
-		'name': 'root',
-		'level': DEBUG, 
-		'destination': CONSOLE,
-		'write_type': 'a',
-		'rotating': False,
-		'message_style': None
+        'name': 'root',
+        'level': DEBUG, 
+        'destination': CONSOLE,
+        'write_type': 'a',
+        'rotating': False,
+        'message_style': None
 }
 
 LOGFILE_STYLE = lambda: f'./logs/{datetime.now().month}_{datetime.now().day}_{datetime.now().year}-{datetime.now().hour}_{datetime.now().minute}.log'
@@ -31,10 +31,10 @@ LOGFILE_STYLE = lambda: f'./logs/{datetime.now().month}_{datetime.now().day}_{da
 
 #DEFAULT_LOGGER =
 #{
-#		name: 'root',
-#		level = DEFAULT, 
-#		destination = '../logs/log.log',
-#		write_type = 'a',
-#		rotating = True,
-#		message_style = None
+#        name: 'root',
+#        level = DEFAULT, 
+#        destination = '../logs/log.log',
+#        write_type = 'a',
+#        rotating = True,
+#        message_style = None
 #}
