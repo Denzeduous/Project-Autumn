@@ -26,7 +26,7 @@ class Reporting(commands.Cog):
         # Save `session_id`, `user_id`, `reported_id`, `macro`, `reason`, and `date` in the respective `Reports` table
             # Save the `report_id` generated. Link showing how to do so in PostreSQL: https://stackoverflow.com/a/2944481
 
-        # Make sure to save the other's user ID as other_user_id so the f-string can inject it properly
+        # Make sure to save the other's user ID as reported_id
         ticket(user_id, reported_id, macro, reason, user=user_id)
         ticket(user_id, reported_id, macro, reason)
         
@@ -44,7 +44,6 @@ class Reporting(commands.Cog):
         """Sends a ticket through an embed to a specified location.
         """
         
-        # Make sure to save the other's user ID as other_user_id so the f-string can inject it properly
         report_template = f'\{{user_id}\} reported \{{reported_id}\} for \{{macro}\}.\nReason:\n{reason}'
         
         # Send report_template to `user` through an embed.
