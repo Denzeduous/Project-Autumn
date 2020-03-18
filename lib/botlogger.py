@@ -12,9 +12,9 @@ import config as conf
 '''
 
 
-DEBUG = 10 # For debugging purposes
+DEBUG   = 10 # For debugging purposes
 DEFAULT = 20 # The default, essentially 'INFO' on normal logger
-ERROR = 30 # For explicitly ONLY error messages
+ERROR   = 30 # For explicitly ONLY error messages
 
 CONSOLE = 1
 
@@ -26,11 +26,11 @@ CONSOLE = 1
 
 class Configuration:
     def __init__(self,
-            name: str = conf.DEFAULT_LOGGER['name'],
-            level: int = conf.DEFAULT_LOGGER['level'], destination = conf.DEFAULT_LOGGER['destination'],
-            write_type: str = conf.DEFAULT_LOGGER['write_type'], rotating: bool = conf.DEFAULT_LOGGER['rotating'],
-            message_style = conf.DEFAULT_LOGGER['message_style']
-    ):
+                 name: str = conf.DEFAULT_LOGGER['name'],
+                 level: int = conf.DEFAULT_LOGGER['level'], destination = conf.DEFAULT_LOGGER['destination'],
+                 write_type: str = conf.DEFAULT_LOGGER['write_type'], rotating: bool = conf.DEFAULT_LOGGER['rotating'],
+                 message_style = conf.DEFAULT_LOGGER['message_style']
+                ):
         """
         Configuration class for the logger.
 
@@ -48,7 +48,7 @@ class Configuration:
         self.write_type = write_type
         self.rotating = rotating
 
-        # Not possible to use and x = c and a or b here
+        # Not possible to use ternary expression here
         if message_style is None:
             self.message_style = lambda message, type: f'{datetime.now().hour}:{datetime.now().minute} {name} | {type} | >> {message}'
         else:
@@ -78,7 +78,6 @@ class Logger:
             else:
                 with open(self.config.destination, self.config.write_type) as f:
                     f.write(self.config.message_style(message, 'DEBUG') + '\n')
-                    self.output_amount += 1
 
     def send(self, message: str):
         """
@@ -94,7 +93,6 @@ class Logger:
             else:
                 with open(self.config.destination, self.config.write_type) as f:
                     f.write(self.config.message_style(message, 'INFO') + '\n')
-                    self.output_amount += 1
 
     def error(self, message: str):
         """
@@ -110,7 +108,6 @@ class Logger:
             else:
                 with open(self.config.destination, self.config.write_type) as f:
                     f.write(self.config.message_style(message, 'ERROR') + '\n')
-                    self.output_amount += 1
 
     def verbose(self, message: str):
         if conf.verbose:
@@ -120,12 +117,12 @@ class Logger:
             else:
                 with open(self.config.destination, self.config.write_type) as f:
                     f.write(self.config.message_style(message, 'VERBOSE') + '\n')
-                    self.output_amount += 1
 
 
 '''
     Default constant
 '''
+
 
 DEFAULT_CONFIG = Configuration(conf.DEFAULT_LOGGER['name'],
                                conf.DEFAULT_LOGGER['level'],
@@ -134,3 +131,12 @@ DEFAULT_CONFIG = Configuration(conf.DEFAULT_LOGGER['name'],
                                conf.DEFAULT_LOGGER['rotating'],
                                conf.DEFAULT_LOGGER['message_style']
                  )
+
+DEFAULT_LOGGER = {
+        'name': 'root',
+        'level': DEBUG, 
+        'destination': CONSOLE,
+        'write_type': 'a',
+        'rotating': False,
+        'message_style': None
+}
